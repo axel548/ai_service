@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.platzi.platzi_play.persistence.crud.CrudMovieEntity;
 import com.platzi.platzi_play.persistence.entity.MovieEntity;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.platzi.platzi_play.domain.dto.MovieDto;
+import com.platzi.platzi_play.domain.service.MovieService;
 
 
 /**
@@ -22,14 +26,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 public class MovieController {
 
-    private final CrudMovieEntity crudMovieEntity;
+    private final MovieService movieService;
 
-    public MovieController(CrudMovieEntity crudMovieEntity){
-        this.crudMovieEntity = crudMovieEntity;
+    public MovieController(MovieService movieService){
+        this.movieService = movieService;
     }
 
     @GetMapping("/movies")
-    public List<MovieEntity> getAll() {
-        return (List<MovieEntity>) this.crudMovieEntity.findAll();
+    public List<MovieDto> getAll() {
+        return this.movieService.getAll();
     }
 }
